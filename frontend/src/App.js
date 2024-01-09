@@ -34,7 +34,6 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/admin/users" element={<AdminUsersPage />} />
-        <Route path="/admin/admins" element={<AdminAdminsPage />} />
         <Route path="/books/:bookId" element={<BookDetailPage />} />
         {isLoggedIn && userRole === 'admin' ? (
           <Route path="/admin/add-book" element={<AddBookPage />} />
@@ -53,6 +52,11 @@ function App() {
         )}
         {isLoggedIn && userRole === 'admin' ? (
           <Route path="/admin/users" element={<AdminUsersPage />} />
+        ) : (
+          <Route path="/not-found" element={<NotFoundPage />} />
+        )}
+        {isLoggedIn && userRole === 'admin' ? (
+          <Route path="/admin/admins" element={<AdminAdminsPage />} />
         ) : (
           <Route path="/not-found" element={<NotFoundPage />} />
         )}
