@@ -18,12 +18,28 @@ import AdminAdminsPage from './components/Admin/AdminAdminsPage';
 import AdminUsersPage from './components/Admin/AdminUsersPage';
 import NotFoundPage from './components/Basic/NotFoundPage';
 
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+return (
+  <div className="App">
+    <Header />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/adminregister" element={<AdminRegisterPage />} />
+      <Route path="/faq" element={<FaqPage />} />
+      <Route path="/about" element={<AboutUsPage />} />
+      <Route path="/books" element={<BooksPage />} />
+      <Route path="/admin/users" element={<AdminUsersPage />} />
+      <Route path="/books/:bookId" element={<BookDetailPage />} />
+      <Route path="/admin/add-book" element={<AddBookPage />} />
+      <Route path="/admin/edit-book/:id" element={<EditBookPage />} />
+      <Route path="/admin/books" element={<AdminBooksPage />} />
+      <Route path="/admin/users" element={<AdminUsersPage />} />
+      <Route path="/admin/admins" element={<AdminAdminsPage />} />
+    </Routes>
+    <Footer />
+  </div>
+);
 }
 
 export default App;
