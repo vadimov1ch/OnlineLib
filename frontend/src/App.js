@@ -18,28 +18,49 @@ import AdminAdminsPage from './components/Admin/AdminAdminsPage';
 import AdminUsersPage from './components/Admin/AdminUsersPage';
 import NotFoundPage from './components/Basic/NotFoundPage';
 
-return (
-  <div className="App">
-    <Header />
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/adminregister" element={<AdminRegisterPage />} />
-      <Route path="/faq" element={<FaqPage />} />
-      <Route path="/about" element={<AboutUsPage />} />
-      <Route path="/books" element={<BooksPage />} />
-      <Route path="/admin/users" element={<AdminUsersPage />} />
-      <Route path="/books/:bookId" element={<BookDetailPage />} />
-      <Route path="/admin/add-book" element={<AddBookPage />} />
-      <Route path="/admin/edit-book/:id" element={<EditBookPage />} />
-      <Route path="/admin/books" element={<AdminBooksPage />} />
-      <Route path="/admin/users" element={<AdminUsersPage />} />
-      <Route path="/admin/admins" element={<AdminAdminsPage />} />
-    </Routes>
-    <Footer />
-  </div>
-);
+function App() {
+  const isLoggedIn = !!localStorage.getItem('authToken');
+  const userRole = localStorage.getItem('userRole');
+
+  return (
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/adminregister" element={<AdminRegisterPage />} />
+        <Route path="/faq" element={<FaqPage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/books" element={<BooksPage />} />
+        <Route path="/admin/users" element={<AdminUsersPage />} />
+        <Route path="/admin/admins" element={<AdminAdminsPage />} />
+        <Route path="/books/:bookId" element={<BookDetailPage />} />
+        {isLoggedIn && userRole === 'admin' ? (
+          <Route path="/admin/add-book" element={<AddBookPage />} />
+        ) : (
+          <Route path="/not-found" element={<NotFoundPage />} />
+        )}
+        {isLoggedIn && userRole === 'admin' ? (
+          <Route path="/admin/edit-book/:id" element={<EditBookPage />} />
+        ) : (
+          <Route path="/not-found" element={<NotFoundPage />} />
+        )}
+        {isLoggedIn && userRole === 'admin' ? (
+          <Route path="/admin/books" element={<AdminBooksPage />} />
+        ) : (
+          <Route path="/not-found" element={<NotFoundPage />} />
+        )}
+        {isLoggedIn && userRole === 'admin' ? (
+          <Route path="/admin/users" element={<AdminUsersPage />} />
+        ) : (
+          <Route path="/not-found" element={<NotFoundPage />} />
+        )}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
